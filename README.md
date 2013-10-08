@@ -33,7 +33,7 @@ Modfile中默认配置了以下第三方库下载地址：
 * jQuery 1.x
 * jQuery 2.x
 
-```
+```js
 {
     options: {
         dest: "js/vendor/"
