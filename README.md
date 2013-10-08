@@ -11,9 +11,9 @@
 
 ### 构建
 
-安装Node环境后使用npm安装Mod:
+安装Node环境后使用NPM安装[Mod](http://madscript.com/modjs/):
 ```sh
-$ npm install mod -g
+$ npm install modjs -g
 ```
 
 成功安装后, 进入Modfile所在的目录，执行mod：
