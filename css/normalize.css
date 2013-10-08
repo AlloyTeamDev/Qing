@@ -1,0 +1,31 @@
+/**
+ * 1. 设置默认字体为“无衬线”字体
+ * 2. 阻止iOS下当屏幕方向改变时字体大小的改变
+ */
+
+html {
+    font-family: "Helvetica Neue", Helvetica, STHeiTi, "Microsoft YaHei", sans-serif; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * 重置body的margin样式
+ */
+
+body {
+    margin: 0;
+}
+
+/*
+ * 消除图片与父容器底部间的空隙，参考： http://jsfiddle.net/gZQRJ/165/
+ */
+
+img {
+    vertical-align: middle;
+}
+
+/* 阻止长按菜单 */
+
+a, img {
+    -webkit-touch-callout: none;
+}
