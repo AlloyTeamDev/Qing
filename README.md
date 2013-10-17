@@ -10,6 +10,20 @@
 
 ### 模版结构
 
+基础的文件目录结构：
+```
+.
+├── css
+│   ├── main.css
+│   └── normalize.css
+├── img
+├── js
+│   ├── main.js
+│   └── vendor
+├── .editorconfig
+├── index.html
+└── Modfile
+```
 
 ### 构建过程
 
