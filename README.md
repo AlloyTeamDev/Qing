@@ -210,6 +210,7 @@ Modfile中默认配置了以下第三方库下载地址：
 * jQuery 2.x
 * require.js 2.1.9
 * requirejs-tmpl
+
 ```js
 {
     options: {
