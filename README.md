@@ -79,9 +79,32 @@ Qing在构建的时候会自动侦测所有引入的样式文件是否使用了`
 <script src="js/89ef9b6e.fastclick_main_3_520.js"></script>
 ```
 
+### data-rev配置
+
+Qing会自动给所有优化后的静态资源加上类似 `89ef9b6e.` 的指纹标示前缀来区分版本，此行为是默认打开，
+可以通过`data-no-rev`声明来关闭，也可以`data-rev`声明开启。
+
+```html
+<html data-no-rev>
+<link rel="stylesheet" href="css/main.css">
+<script data-rev src="js/main.js"></script>
+<img src="img/foo.png">
+```
+
+如上通过在HTML标签中`<html data-no-rev>`设置全局的策略，同时可在具体的标签上覆盖全局设置，如上构建后的结果：
+
+```html
+<html>
+<link rel="stylesheet" href="css/main.css">
+<script src="js/89ef9b6e.main.js"></script>
+<img src="img/foo.png">
+```
+
 #### data-stand-alone配置
 
-有时要求某个基础库文件如jQuery能被不同页面复用引入，而不是分别被打包在页面级别的资源包内，如此利用浏览器天然的缓存机制使无需重新请求相同的资源内容，Qing在默认构建约定的基础上同时提供了基于DOM的`data-stand-alone`配置。
+有时要求某个基础库文件如jQuery能被不同页面复用引入，而不是分别被打包在页面级别的资源包内，
+如此利用浏览器天然的缓存机制使无需重新请求相同的资源内容，
+Qing在默认构建约定的基础上同时提供了基于DOM的`data-stand-alone`配置。
 
 ```html
 <script data-stand-alone src="vendor/jquery-2.0.3.js"></script>
@@ -98,7 +121,9 @@ Qing在构建的时候会自动侦测所有引入的样式文件是否使用了`
 
 #### data-group配置
 
-如何重复利用浏览器的并发请求数但同时考虑不至于有过多请求数上的负载，在不同场景下优化策略会有不同：当需兼容IE老版本的情况下，初始并发请求数不推荐超过2个，但同时我们推荐单个资源包的大小Gzip前不超过200k，所以通常如何来控制打包粒度是需要监控数据来支撑的。Qing在构建中提供了`data-group`分组参数来辅助打包粒度的控制：
+如何重复利用浏览器的并发请求数但同时考虑不至于有过多请求数上的负载，在不同场景下优化策略会有不同：
+当需兼容IE老版本的情况下，初始并发请求数不推荐超过2个，但同时我们推荐单个资源包的大小Gzip前不超过200k，
+所以通常如何来控制打包粒度是需要监控数据来支撑的。Qing在构建中提供了`data-group`分组参数来辅助打包粒度的控制：
 
 ```html
 <script data-group=1 src="js/foo.js"></script>
@@ -138,7 +163,8 @@ Qing在构建的时候会自动侦测所有引入的样式文件是否使用了`
 
 #### 内嵌静态资源
 
-所谓减少请求数最优的目标就是没有请求，Qing提供了基于QueryString的`embed`配置使支持在构建时将静态资源内嵌于HTML中，如此便可优化至最理想的情况：只需下载必不可少的HTML资源文件。
+所谓减少请求数最优的目标就是没有请求，Qing提供了基于QueryString的`embed`配置使支持在构建时将静态资源内嵌于HTML中，
+如此便可优化至最理想的情况：只需下载必不可少的HTML资源文件。
 
 ##### 内嵌样式
 ```html
