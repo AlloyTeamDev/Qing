@@ -79,7 +79,7 @@ Qing在构建的时候会自动侦测所有引入的样式文件是否使用了`
 <script src="js/89ef9b6e.fastclick_main_3_520.js"></script>
 ```
 
-### data-rev配置
+#### data-rev配置
 
 Qing会自动给所有优化后的静态资源加上类似 `89ef9b6e.` 的指纹标示前缀来区分版本，此行为是默认打开，
 可以通过`data-no-rev`声明来关闭，也可以`data-rev`声明开启。
