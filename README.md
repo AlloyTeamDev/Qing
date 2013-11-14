@@ -43,6 +43,29 @@ Mod默认会在当前目录下生成dist目录输出构建后的结果。
 
 浏览器第一次请求服务器的过程至少需经过3RTTs：DNS域名解析1RTT；TCP连接建立1RTT；HTTP请求并且返回第一个比特的数据1RTT。而这在移动基站网络下请求则显得异常缓慢，在我们的监测中，在2G网络下仅DNS时间即可达到200ms，性能不容乐观。所以尽可能快的完成页面加载在移动端显得更加重要，而如何合理的减少页面初始资源请求数是加快页面加载最有效的方式：
 
+#### 合并JS模块
+Qing支持传统的手动模块加载管理与基于AMD/CMD的模块加载管理方式，同时我们较推荐使用Require.js或Sea.js作为开发过程中的模块加载工具。
+
+```html
+<!-- JS模块模块手动管理 -->
+<script src="js/fastclick.js"></script>
+<script src="js/spin.js"></script>
+<script src="js/main.js"></script>
+```
+传统的手动添加模块会自动合并，其按照合并连续引入资源的规则进行，最终输出：
+```html
+<script src="js/89ef9b6e.fastclick_main_3_520.js"></script>
+```
+
+```html
+<!-- data-main属性值为执行入口JS文件地址 -->
+<script data-main="js/main" src="http://requirejs.org/docs/release/2.1.6/minified/require.js"></script>
+```
+通过模块加载器方式，Qing会自动移除模块加载器本身，其并不打包进最终输出的文件：
+```html
+<script src="js/89ef9b6e.main.js"></script>
+```
+
 #### 合并CSS @imports
 
 在页面中引入了样式文件`css/main.css`：
