@@ -22,7 +22,7 @@
 │   └── vendor
 ├── .editorconfig
 ├── index.html
-└── Modfile
+└── Modfile.js
 ```
 
 ### 构建过程
@@ -32,9 +32,9 @@
 $ npm install modjs -g
 ```
 
-成功安装后, 进入Modfile所在的目录，执行mod：
+成功安装后, 进入Modfile所在的目录，只需执行mod，一切如此简单：
 ```sh
-$ mod build
+$ mod
 ```
 
 Mod默认会在当前目录下生成dist目录输出构建后的结果。
