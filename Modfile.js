@@ -36,7 +36,7 @@ module.exports = {
     },
 
     targets: {
-        build: ['build'],
+        default: ['build'],
         vendor: ['download']
     }
 };
