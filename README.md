@@ -20,14 +20,20 @@
 ├── js
 │   ├── main.js
 │   └── vendor
+├── tpl
 ├── .editorconfig
 ├── index.html
 └── Modfile.js
 ```
 
-### 构建过程
+* 目录`css`托管样式文件
+* 目录`img`托管图片文件
+* 目录`js`托管JavaScript文件
+* 目录`tpl`托管模版文件
 
-安装Node环境后使用NPM安装[Mod](http://madscript.com/modjs/):
+### 环境安装与构建过程
+
+安装Node环境后使用NPM安装[Mod.js](http://madscript.com/modjs/):
 ```sh
 $ npm install modjs -g
 ```
@@ -284,6 +290,7 @@ Modfile中默认配置了以下第三方库下载地址：
         src: "http://requirejs.org/docs/release/2.1.9/comments/require.js"
     },
     tmpl: {
+        dest: 'js/',
         src: "https://raw.github.com/modulejs/requirejs-tmpl/master/tmpl.js"
     }
 }
