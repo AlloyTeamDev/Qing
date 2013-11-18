@@ -26,6 +26,7 @@ module.exports = {
                 src: "http://requirejs.org/docs/release/2.1.9/comments/require.js"
             },
             tmpl: {
+                dest: 'js/',
                 src: "https://raw.github.com/modulejs/requirejs-tmpl/master/tmpl.js"
             }
         },
