@@ -2,26 +2,61 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>标题</title>
-    <link rel="stylesheet" href="css/main.css?embed">
-    <meta name="description" content="描述">
-    <meta name="keywords" content="关键字1,关键字2,关键字3">
-    <meta name="author" content="作者1,作者2">
-    <!--  禁止自动对符合电话格式的文本的格式化显示 -->
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <!-- 禁止自动对符合电话格式的文本的格式化显示 -->
     <meta name="format-detection" content="telephone=no">
-    <!--  禁止自动对符合地址格式的文本的格式化显示 -->
+    <!-- 禁止自动对符合地址格式的文本的格式化显示 -->
     <meta name="format-detection" content="address=no">
-    <!--  视窗宽度指定为设备支持宽度，禁止缩放 -->
+    <!-- 视窗宽度指定为设备支持宽度，禁止缩放 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--  使IE9以下的浏览器支持ES5 API -->
+    <!-- 页面样式, 通过@import机制模块化管理CSS文件 -->
+    <link rel="stylesheet" href="css/main.css?embed">
+    <!-- 页面演示样式, 请移除此 -->
+    <style>
+        html {
+            color: #737373;
+            background: #f0f0f0;
+        }
+
+        .container {
+            max-width: 640px;
+            _width: 640px; /* IE6 */
+            margin: 0 auto;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul li img {
+            max-width: 100%;
+            height: auto;
+            margin: 2px;
+        }
+
+    </style>
+    <!-- 使IE9以下的浏览器支持ES5 API，无需兼容PC可移除此 -->
     <!--[if lt IE 9]><script src="http://pub.idqqimg.com/lib/es5-shim/latest/es5-shim.min.js"></script><![endif]-->
 </head>
 <body>
 
-<!-- 主体内容 -->
-<div id="hello"></div>
+<!-- 页面演示结构, 请替换此 -->
+<div class="container">
+    <h1>Hello world! Hello Qing!</h1>
+    <ul>
+        <li><img src="http://placehold.it/640x300" alt=""/></li>
+        <li><img src="http://placehold.it/640x300" alt=""/></li>
+        <li><img src="http://placehold.it/640x300" alt=""/></li>
+        <li><img src="http://placehold.it/640x300" alt=""/></li>
+    </ul>
+</div>
 
 <!-- data-main属性值为执行入口JS文件地址 -->
-<script data-main="js/main" src="http://requirejs.org/docs/release/2.1.6/minified/require.js"></script>
+<script data-main="js/main" src="http://requirejs.org/docs/release/2.1.9/minified/require.js"></script>
 </body>
 </html>
