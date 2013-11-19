@@ -1,6 +1,6 @@
 ### Qing
 
-为什么是Qing？因为强大且足够Qing量。Qing是一套基础开发模版，来源于我们在手机与PC端上的大量工程实践。Qing所提供不是冷冰冰的文件，而是一套Web前端解决方案，
+为什么是Qing？因为强大且足够Qing量，3分钟内掌握最先进的Web开发技能。Qing是一套基础开发模版，来源于我们在手机与PC端上的大量工程实践。Qing所提供不是冷冰冰的文件，而是一套Web前端解决方案，
 所以Qing不只是关注项目的初始状态，而是整体的工作流程，这是Qing与现有开源的开发模版显著差异的一点。Qing的体验必须是
 高效且愉悦的，拒绝繁琐与重复。以下是Qing所基于的开发理念：
 
@@ -17,6 +17,22 @@
 * Chrome
 * Firefox
 * Safari
+
+### 开始使用
+
+可以使用以下任意一种方式来开始使用Qing模版：
+
+1. [下载最新Qing模版包](https://github.com/AlloyTeam/Qing/archive/master.zip), 解压至目标目录
+
+2. 如果已安装git，可使用git clone源码至目标目录：
+```sh
+$ git clone https://github.com/AlloyTeam/Qing.git
+```
+
+3. 如果已安装了Mod.js, 推荐使用以下的方式：
+```sh
+$ m download AlloyTeam/Qing
+```
 
 ### 模版结构
 
@@ -41,21 +57,26 @@
 * 目录`js`托管JavaScript文件
 * 目录`tpl`托管模版文件
 
-### 环境安装与构建过程
+### 环境安装
 
-安装Node环境后使用NPM安装[Mod.js](http://madscript.com/modjs/):
+1. 安装[Node.js](http://nodejs.org/)
+
+2. 安装[Mod.js](http://madscript.com/modjs/)
+
+Mod.js是基于Node.js的工作流工具，安装Node.js环境后使用NPM安装Mod.js:
 ```sh
 $ npm install modjs -g
 ```
 
-成功安装后, 进入Modfile所在的目录，只需执行mod，一切如此简单：
-```sh
-$ mod
-```
+### 构建方式
 
+成功安装Mod.js后, 进入Modfile所在的项目根目录，只需执行`m`命令，一切如此简单：
+```sh
+$ m
+```
 Mod默认会在当前目录下生成dist目录输出构建后的结果。
 
-### 性能优化
+### 优化配置
 
 浏览器第一次请求服务器的过程至少需经过3RTTs：DNS域名解析1RTT；TCP连接建立1RTT；HTTP请求并且返回第一个比特的数据1RTT。而这在移动基站网络下请求则显得异常缓慢，在我们的监测中，在2G网络下仅DNS时间即可达到200ms，性能不容乐观。所以尽可能快的完成页面加载在移动端显得更加重要，而如何合理的减少页面初始资源请求数是加快页面加载最有效的方式：
 
