@@ -56,6 +56,58 @@ $ m download AlloyTeam/Qing
 * 目录`img`托管图片文件
 * 目录`js`托管JavaScript文件
 * 目录`tpl`托管模版文件
+* `.editorconfig`约定团队基础代码风格
+* `index.html`是入口HTML文件
+* `Modfile.js`是Mod.js配置文件
+
+### 模块化编程指引
+
+#### CSS模块化
+
+```css
+@import "normalize.css";
+@import "widget1.css";
+@import "widget2.css";
+@import "widget3.css";
+```
+
+#### JS模块化
+
+```js
+// main.js
+define(["./app"], function(app){
+    app.init()
+})
+```
+
+```js
+// app.js
+define(function(){
+    return {
+        init: function(){}
+    }
+})
+```
+
+#### HTML模块化
+
+```html
+<!-- tpl/headerTpl.html -->
+<header><%= title %></header>
+```
+
+```html
+<!-- tpl/footerTpl.html -->
+<footer><%= copyright %></header>
+```
+
+```js
+// js/app.js
+define(["tmpl!../tpl/headerTpl.html", "tmpl!../tpl/footerTpl.html"], function(headerTpl, footerTpl){
+    headerTpl({title: "Hello Qing"})
+    footerTpl({copyright: "@AlloyTeam})
+})
+```
 
 ### 环境安装
 
