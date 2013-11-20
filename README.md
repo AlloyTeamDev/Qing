@@ -428,4 +428,5 @@ $ m download:zepto
 
 ### 社区
 
-需求、改进与建议，可在[Github issues](https://github.com/AlloyTeam/Qing/issues)提单，会一一解答，同样，女士优先。
+需求、改进与建议，可在[Github issues](https://github.com/AlloyTeam/Qing/issues)提单，会一一解答。同时Qing是面向社区的开源项目，
+邀请社区朋友共同参与贡献，如你觉得Qing很棒很酷，也可以帮助我们在微博与博客中推广与传播。
