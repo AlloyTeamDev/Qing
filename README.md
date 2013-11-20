@@ -20,7 +20,7 @@
 
 ### 开始使用
 
-可以使用以下任意一种方式来开始使用Qing模版：
+可以通过以下任意一种方式开始使用Qing模版：
 
 1. [下载最新Qing模版包](https://github.com/AlloyTeam/Qing/archive/master.zip), 解压至目标目录
 
