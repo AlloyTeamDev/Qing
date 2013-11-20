@@ -259,7 +259,7 @@ define(['./base/clone'], function(clone){
 build: {
     src: "./index.html",
     stripDefine: true,
-    varModules: ['tpl'，'base']
+    varModules: ['tpl', 'base']
 }
 ```
 
