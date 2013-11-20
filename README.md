@@ -1,6 +1,8 @@
-### Qing
+## Qing
 
-为什么是Qing？因为强大且足够Qing量，3分钟内掌握最先进的Web开发技能。Qing是一套基础开发模版，来源于我们在手机与PC端上的大量工程实践。Qing所提供不是冷冰冰的文件，而是一套Web前端解决方案，
+为什么有Qing？笔者微微转头凝视着旁边的女开发同事...思考片刻后决定还是这样写: 作为业内领先的前端团队，回馈社区助力移动Web的发展是我们的责任与义务。
+为什么是Qing？因其足够Qing量，只需3分钟内即可掌握最先进的Web开发技能。
+Qing是一套基础开发模版，来源于我们在手机与PC端上的大量工程实践。Qing所提供不是冷冰冰的文件，而是一套Web前端解决方案，
 所以Qing不只是关注项目的初始状态，而是整体的工作流程，这是Qing与现有开源的开发模版显著差异的一点。Qing的体验必须是
 高效且愉悦的，拒绝繁琐与重复。以下是Qing所基于的开发理念：
 
@@ -9,7 +11,9 @@
 3. 模块化Web开发过程
 4. 自动构建与部署集成, 基于Mod.js工具
 
-版本兼容：
+基于的开发离理念完全不新，Qing旨在通过提供一套Web模版把其工程化。
+
+平台与浏览器版本兼容：
 
 * iOS 4.0+
 * Android 2.2+
@@ -29,14 +33,20 @@
 $ git clone https://github.com/AlloyTeam/Qing.git
 ```
 
-3. 如果已安装了Mod.js, 推荐使用以下的方式：
+3. 如果已安装了Mod.js, 推荐在目标目录执行：
 ```sh
 $ m download AlloyTeam/Qing
 ```
+第一次使用`m download`命令，需要先安装`mod-tar`插件：
+```
+$ npm install mod-tar -g
+```
+
+4. 如果您是一位女开发，请忽略下文直接联系笔者，深圳优先。
 
 ### 模版结构
 
-基础的文件目录结构：
+团队的协作离不开一些基本的约定，Qing约定以下文件目录结构：
 ```
 .
 ├── css
@@ -62,7 +72,11 @@ $ m download AlloyTeam/Qing
 
 ### 模块化编程指引
 
+Qing推荐模块化的开发过程，模块化开发后无论在代码可维护性与复用，还是团队协作上都将变的更加直观、轻松与高效。
+
 #### CSS模块化
+
+通过原生CSS内置的@import机制管理CSS模块，在构建过程中会自动合并压缩（在下文的优化章节也有说明）：
 
 ```css
 @import "normalize.css";
@@ -72,6 +86,8 @@ $ m download AlloyTeam/Qing
 ```
 
 #### JS模块化
+
+约定引入AMD规范来管理JS模块，关于第一次接触AMD的读者，笔者推荐可以先Google了解后再进行下一步：
 
 ```js
 // main.js
@@ -91,9 +107,20 @@ define(function(){
 
 #### HTML模块化
 
+HTML模块指代HTML模版文件，通过`requirejs-tmpl`插件将HTML分模块管理，`requirejs-tmpl`没有默认打包在Qing模版中，可手动下载
+[requirejs-tmpl](https://raw.github.com/modulejs/requirejs-tmpl/master/tmpl.js`)插件至js目录，或通过执行`m download:tmpl`
+命令自动安装插件：
+
 ```html
 <!-- tpl/headerTpl.html -->
 <header><%= title %></header>
+<!-- HTMl模版可依赖其他HTML模块 -->
+<%@ ./navTpl.html %>
+```
+
+```html
+<!-- tpl/navTpl.html -->
+<a href="<%= url %>">View On Github</a>
 ```
 
 ```html
@@ -101,15 +128,19 @@ define(function(){
 <footer><%= copyright %></header>
 ```
 
+在HTML模版的引入是基于`requirejs`的插件机制，所以在具体路径前需加上`tmpl!`前缀，表示其是HTML模版，例如：`tmpl!../tpl/headerTpl.html`。
+引用的模版已通过插件自动编译，得到的函数如`headerTpl`直接传入需要绑定的数据即可：
+
 ```js
 // js/app.js
 define(["tmpl!../tpl/headerTpl.html", "tmpl!../tpl/footerTpl.html"], function(headerTpl, footerTpl){
-    headerTpl({title: "Hello Qing"})
-    footerTpl({copyright: "@AlloyTeam})
+    var html1 = headerTpl({title: "Hello Qing", url: "http://github.com/AlloyTeam/Qing"})
+    var html2 = footerTpl({copyright: "AlloyTeam"})
+    // balabala
 })
 ```
 
-### 环境安装
+### 自动化工具的环境安装
 
 1. 安装[Node.js](http://nodejs.org/)
 
@@ -120,17 +151,19 @@ Mod.js是基于Node.js的工作流工具，安装Node.js环境后使用NPM安装
 $ npm install modjs -g
 ```
 
-### 构建方式
+### 一键构建
 
-成功安装Mod.js后, 进入Modfile所在的项目根目录，只需执行`m`命令，一切如此简单：
+成功安装Mod.js后, 进入Modfile所在的项目根目录，只需执行`m`命令，一切如此简单，如假包换的一键构建：
 ```sh
 $ m
 ```
-Mod默认会在当前目录下生成dist目录输出构建后的结果。
+执行完成后会在当前目录下生成`dist`目录输出构建后的结果。
 
-### 优化配置
+### 性能优化
 
-浏览器第一次请求服务器的过程至少需经过3RTTs：DNS域名解析1RTT；TCP连接建立1RTT；HTTP请求并且返回第一个比特的数据1RTT。而这在移动基站网络下请求则显得异常缓慢，在我们的监测中，在2G网络下仅DNS时间即可达到200ms，性能不容乐观。所以尽可能快的完成页面加载在移动端显得更加重要，而如何合理的减少页面初始资源请求数是加快页面加载最有效的方式：
+浏览器第一次请求服务器的过程至少需经过3RTTs：DNS域名解析1RTT；TCP连接建立1RTT；HTTP请求并且返回第一个比特的数据1RTT。
+而这在移动基站网络下请求则显得异常缓慢，在我们的监测中，在2G网络下仅DNS时间即可达到200ms，性能不容乐观。
+所以尽可能快的完成页面加载在移动端显得更加重要，而如何合理的减少页面初始资源请求数是加快页面加载最有效的方式：
 
 #### 合并JS模块
 Qing支持传统的手动模块加载管理与基于AMD/CMD的模块加载管理方式，同时我们较推荐使用Require.js或Sea.js作为开发过程中的模块加载工具。
@@ -339,7 +372,7 @@ js/main.js...
 
 ### 基础库
 
-Modfile中默认配置了以下第三方库下载地址：
+Qing总是想法设法的让开发过程更自动更流畅，在Qing模版的`Modfile.js`中提供了以下第三方库的下载配置：
 
 * FastClick
 * Spin.js
@@ -348,6 +381,9 @@ Modfile中默认配置了以下第三方库下载地址：
 * jQuery 2.x
 * require.js 2.1.9
 * requirejs-tmpl
+
+截取`Modfile.js`中关于第三方库的配置，src表示源地址，dest表示下载目录，
+除了tmpl插件下载至`js/`目录其他所有第三方库都默认下载至`js/vendor/`目录：
 
 ```js
 {
@@ -379,13 +415,17 @@ Modfile中默认配置了以下第三方库下载地址：
 }
 ```
 
-下载全部库至本地：
+下载全部库至本地方式非常简单，只需在根目录下执行：
 ```sh
-$ mod vendor
+$ m vendor
 ```
 
 如只需下载Zepto：
 
 ```sh
-$ mod download:zepto
+$ m download:zepto
 ```
+
+### 社区
+
+需求、改进与建议，可在[Github issues](https://github.com/AlloyTeam/Qing/issues)提单，会一一解答，同样，女士优先。
