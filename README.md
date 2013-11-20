@@ -108,7 +108,7 @@ define(function(){
 #### HTML模块化
 
 HTML模块指代HTML模版文件，通过`requirejs-tmpl`插件将HTML分模块管理，`requirejs-tmpl`没有默认打包在Qing模版中，可手动下载
-[requirejs-tmpl](https://raw.github.com/modulejs/requirejs-tmpl/master/tmpl.js`)插件至js目录，或通过执行`m download:tmpl`
+[requirejs-tmpl](https://raw.github.com/modulejs/requirejs-tmpl/master/tmpl.js)插件至js目录，或通过执行`m download:tmpl`
 命令自动安装插件：
 
 ```html
@@ -166,7 +166,7 @@ $ m
 所以尽可能快的完成页面加载在移动端显得更加重要，而如何合理的减少页面初始资源请求数是加快页面加载最有效的方式：
 
 #### 合并JS模块
-Qing支持传统的手动模块加载管理与基于AMD/CMD的模块加载管理方式，同时我们较推荐使用Require.js或Sea.js作为开发过程中的模块加载工具。
+Qing支持传统的手动模块加载管理与基于AMD的模块加载管理方式，同时我们推荐使用Require.js作为开发过程中的模块加载工具。
 
 ```html
 <!-- JS模块模块手动管理 -->
