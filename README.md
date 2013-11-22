@@ -236,9 +236,23 @@ define(function(){
 ```
 
 ```js
-// main.js
+// foo.js
 define(['./base/clone'], function(clone){
-    var foo = clone({bar:1})
+    var foo = clone({foo:1})
+})
+```
+
+```js
+// bar.js
+define(['./base/clone'], function(clone){
+    var bar = clone({bar:1})
+})
+```
+
+```js
+// main.js
+define('./foo', './bar'], function(){
+    var baz = "baz";
 })
 ```
 
@@ -249,7 +263,9 @@ define(['./base/clone'], function(clone){
     return function(obj){
         return Object.create(obj)
     };
-    var foo = clone({bar:1})
+    var foo = clone({bar:1});
+    var bar = clone({bar:1});
+    var baz = "baz";
 })(this)
 ```
 
@@ -270,7 +286,9 @@ build: {
     var clone = function(obj){
         return Object.create(obj)
     };
-    var foo = clone({bar:1})
+    var foo = clone({bar:1});
+    var bar = clone({bar:1});
+    var baz = "baz";
 })(this)
 ```
 
