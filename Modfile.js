@@ -32,8 +32,7 @@ module.exports = {
         },
         build: {
             src: "./index.html",
-            stripDefine: true,
-            varModules: ['tpl']
+            stripDefine: true
         }
     },
 
