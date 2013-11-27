@@ -192,38 +192,11 @@ Qing默认开启的是移除`define`生成模块管理器无依赖代码的`stri
 ```js
 build: {
     src: "./index.html",
-    stripDefine: true,
-    varModules: ['tpl']
+    stripDefine: true
 }
 ```
 
 在`stripDefine`优化模式下，基于AMD规范文件：
-
-```js
-// js/foo.js
-define(function(){
-    var foo = "foo"
-})
-```
-
-```js
-// js/bar.js
-define([./foo], function(){
-    var bar = "bar"
-})
-```
-
-会优化为：
-
-```js
-(function(window, undefined){
-    var foo = "foo";
-    var bar = "bar"
-})(this)
-```
-
-以上AMD模块间只是引入其他模块的代码，并未有依赖其他模块暴露的接口。当有接口依赖时，则需使用`varModules`配置项，
-用来指定哪些目录下的AMD模块有暴露接口，`varModules`默认已配置`tpl`模版目录下的HTML模块必然会暴露接口。通过示例代码进一步说明`varModules`：
 
 ```js
 // base/clone.js
@@ -237,57 +210,48 @@ define(function(){
 ```js
 // foo.js
 define(['./base/clone'], function(clone){
-    var foo = clone({foo:1})
+    return clone({foo:1})
 })
 ```
 
 ```js
 // bar.js
 define(['./base/clone'], function(clone){
-    var bar = clone({bar:1})
+    return clone({bar:2})
 })
 ```
 
 ```js
 // main.js
-define('./foo', './bar'], function(){
-    var baz = "baz";
+define('./foo', './bar'], function(foo, bar){
+    foo.bar = 2;
+    bar.foo = 1;
 })
 ```
 
-`main.js`依赖`base/clone.js`通过return暴露的接口，如不指定`varModules`，默认只移除define则会生成以下有问题的代码：
+编译后会在移除define的同时将模块代码转换为变量声明格式的代码：
 
 ```js
 (function(window, undefined){
-    return function(obj){
-        return Object.create(obj)
-    };
-    var foo = clone({bar:1});
-    var bar = clone({bar:1});
-    var baz = "baz";
-})(this)
-```
+    var base_clone = (function(){
+         return function(obj){
+             return Object.create(obj)
+         }
+    })();
 
-如在`varModules`参数中指定base目录，同时约定模块的文件名与接口名一致，即`base/clone.js`的文件名是clone，在引用关系中接口名也需是clone：
+    var foo = (function(clone){
+        return clone({bar:2})
+    })(base_clone);
 
-```js
-build: {
-    src: "./index.html",
-    stripDefine: true,
-    varModules: ['tpl', 'base']
-}
-```
+    var foo = (function(clone){
+        return clone({foo:1})
+    })(base_clone);
 
-此时会在移除define的同时将模块代码转换为变量声明格式的代码：
-
-```js
-(function(window, undefined){
-    var clone = function(obj){
-        return Object.create(obj)
-    };
-    var foo = clone({bar:1});
-    var bar = clone({bar:1});
-    var baz = "baz";
+    var main = (function(foo, bar){
+        foo.bar = 2;
+        bar.foo = 1;
+    })(foo, bar);
+    
 })(this)
 ```
 
