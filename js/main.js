@@ -1,3 +1,4 @@
-define(["./es5-shim"], function () {
+require(["./es5-shim"], function () {
+    alert("It's work");
     // balabala
 })
