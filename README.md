@@ -251,7 +251,7 @@ define('./foo', './bar'], function(foo, bar){
         foo.bar = 2;
         bar.foo = 1;
     })(foo, bar);
-    
+
 })(this)
 ```
 
