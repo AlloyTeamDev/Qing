@@ -3,3 +3,29 @@
  */
  
 @import "normalize.css";
+
+
+/* 以下为页面演示样式, 请移除 */
+
+html {
+    color: #737373;
+    background: #f0f0f0;
+}
+
+.container {
+    max-width: 640px;
+    _width: 640px; /* IE6 */
+    margin: 0 auto;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul li img {
+    max-width: 100%;
+    height: auto;
+    margin: 2px;
+}
